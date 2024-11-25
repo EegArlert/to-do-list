@@ -1,0 +1,49 @@
+:root {
+    font-family: "Open Sans", serif;
+    --font-size-big: 3rem;
+    --font-size-medium: 2rem;
+    --font-size-small: 1rem;
+    --color-main: #fffffff9;
+    --color-secondary: #dbdbdb;
+    --color-font-main: #000000;
+    --color-font-secondary: #3b3b3b;
+    --border-color-1: solid 1px #ff0000;
+    --border-color-2: solid 1px #ffee00;
+    --border-color-3: solid 1px #007bfd;
+    --border-color-4: solid 1px #19fd00;
+    --border-color-5: solid 1px #db00fd;
+}
+
+body {
+    border: var(--border-color-1);
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+body header {
+    border: var(--border-color-3);
+    text-align: center;
+}
+
+body .main-wrapper {
+    border: var(--border-color-2);
+    display: flex;
+    margin-top: 2rem;
+}
+
+body .main-wrapper #side-bar {
+    border: var(--border-color-3);
+    padding: 20px;
+    flex: 0 1 300px;
+}
+
+body .main-wrapper #main-content {
+    border: var(--border-color-4);
+    padding: 20px;
+    flex-grow: 1;
+}
+
+body form {
+    /* visibility: hidden; */
+}

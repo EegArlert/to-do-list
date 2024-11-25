@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
+    <header>
+        <h1>Task Management</h1>
+    </header>
+
+    <div class="main-wrapper">
+        <div id="side-bar">
+            Different theme/group task
+            
+        </div>
+
+        <div id="main-content">
+            card content
+        </div>
+    </div>
     
-    
+    <form action="#" id="add-event">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" maxlength="300">
+
+        <label for="priority">Priority</label>
+        <ul id="priority">
+            <li><input type="radio" name="priority" value="high">High</li>
+            <li><input type="radio" name="priority" value="medium" checked>Medium</li>
+            <li><input type="radio" name="priority" value="low">Low</li>
+        </ul>
+
+        <label for="difficulty">Difficulty</label>
+        <ul id="difficulty">
+            <li><input type="radio" name="difficulty" value="hard">Hard</li>
+            <li><input type="radio" name="difficulty" value="medium" checked>Medium</li>
+            <li><input type="radio" name="difficulty" value="Easy">Easy</li>
+        </ul>
+
+        <label for="duration">Duration</label>
+        <ul id="duration">
+            <li><input type="radio" name="duration" value="long">Long</li>
+            <li><input type="radio" name="duration" value="medium" checked>Medium</li>
+            <li><input type="radio" name="duration" value="short">Short</li>
+        </ul>
+
+        <button id="submit-btn">Add Task</button>
+    </form>
+
 </body>
+
 </html>

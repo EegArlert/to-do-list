@@ -10,12 +10,16 @@ module.exports = {
             title: 'production',
             template: './src/template.html',
         }),
+        
     ],
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
     }, 
+    devServer: {
+       watchFiles: ['./src/template.html'],
+    },
     module: {
         rules: [
             {
