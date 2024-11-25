@@ -1,3 +1,52 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 :root {
     font-family: "Open Sans", serif;
     --font-size-big: 3rem;
@@ -14,36 +63,70 @@
     --border-color-5: solid 1px #db00fd;
 }
 
+li {
+    display: inline;
+}
+
 body {
     border: var(--border-color-1);
     display: flex;
     flex-direction: column;
     height: 95vh;
+    padding: 0 2rem;
 }
 
-body header {
+header {
     border: var(--border-color-3);
     text-align: center;
+    font-size: 3rem;
+    margin: 2rem 0;
 }
 
-body .main-wrapper {
+.main-wrapper {
     border: var(--border-color-2);
     display: flex;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
-body .main-wrapper #side-bar {
+#side-bar {
     border: var(--border-color-3);
     padding: 20px;
     flex: 0 1 300px;
 }
 
-body .main-wrapper #main-content {
+#main-content {
     border: var(--border-color-4);
     padding: 20px;
     flex-grow: 1;
 }
 
-body form {
-    /* visibility: hidden; */
+#main-content h4 {
+    width: 4rem;
+    display: inline;
 }
+
+#main-content #sort-input {
+    width: 15rem;
+    display: inline;
+}
+
+form {
+    /* visibility: hidden; */
+    border-color: var();
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(7, 2rem);
+    align-self: center;
+    width: 40%;
+    row-gap: 1rem;
+    font-size: 1rem;
+}
+
+#submit-btn {
+    grid-column: 1/3;
+    width: 200px;
+    height: 50px;
+    justify-self: center; 
+    font-size: 1.2rem;
+}
+

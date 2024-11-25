@@ -18,13 +18,23 @@
     </header>
 
     <div class="main-wrapper">
-        <div id="side-bar">
-            Different theme/group task
-            
+        <div id="event-group">
+            placeholder for adding different sections of event js object
         </div>
 
         <div id="main-content">
-            card content
+            <div class="content sort">
+                <h4>Sort By:</h4>
+                <ul id="sort-input">
+                    <li><input type="radio">Date</li>
+                    <li><input type="radio">Priority</li>
+                    <li><input type="radio">Duration</li>
+                </ul>
+            </div>
+
+            <div class="content event">
+                placeholder for event card js object
+            </div>
         </div>
     </div>
     
@@ -33,7 +43,11 @@
         <input type="text" name="name" id="name" required>
 
         <label for="description">Description</label>
-        <input type="text" name="description" id="description" maxlength="300">
+        <input type="text" name="description" id="description" maxlength="150">
+
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date" required>
+
 
         <label for="priority">Priority</label>
         <ul id="priority">
