@@ -1,14 +1,24 @@
 import { addEvent } from "../store/localStorage";
+import { selectDOMElement } from "./domHelper";
 
 
 export function submitForm() {
-    console.log("submitForm function invoked")
-    const name = document.querySelector('#name').value;
-    const description = document.querySelector('#description').value;
-    const dueDate = document.querySelector('#due-date')
-    const priority = document.querySelector('input[name="priority"]:checked').value;
-    const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
-    const duration = document.querySelector('input[name="duration"]:checked').value;
+    console.log("submitForm function invoked");
+    const form = selectDOMElement('form');
+    const name = selectDOMElement('#name').value;
+    const description = selectDOMElement('#description').value;
+    const dueDate = selectDOMElement('#date').value;
+    const priority = selectDOMElement('input[name="priority"]:checked').value;
+    const difficulty = selectDOMElement('input[name="difficulty"]:checked').value;
+    const duration = selectDOMElement('input[name="duration"]:checked').value;
 
-    addEvent(name, description, priority, difficulty, duration);
+    addEvent(name, description, dueDate, priority, difficulty, duration);
+
+    console.log(name);
+    console.log(dueDate);
+
+    return {
+        form, name, description, dueDate, priority, difficulty, duration
+    }
+
 }

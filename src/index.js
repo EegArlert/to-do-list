@@ -1,22 +1,30 @@
+import { eventList, allEventList } from './components/EventList';
 import { submitForm } from './utils/form'
-import './styles/template.css'
-import { deleteEvent, getEvent, getAllEvent } from './store/localStorage';
-
-localStorage.clear();
+import './styles/template.css';
+import { getAllEvent } from './store/localStorage';
 
 
-const submitButton = document.querySelector('#submit-btn');
+const submitBtn = document.querySelector('.button-container');
 
-const toggleForm = document.querySelector('form');
-toggleForm.classList.add('test')
+if(localStorage.length > 1) {
+allEventList();
+}
 
-submitButton.addEventListener('click', (e) => {
-    toggleForm.classList.remove('test')
+
+
+submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    submitForm();
-
-    console.log(getEvent("0"));
-    getAllEvent();
+    
+    const submittedForm = submitForm();
+    
+    console.log(localStorage.getItem(localStorage.length-2));
+    
+    
+    
+    
+    eventList();
+    submittedForm.form.reset();
 
 })
+
 

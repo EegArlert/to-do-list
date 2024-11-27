@@ -17,27 +17,42 @@
         <h1>Task Management</h1>
     </header>
 
-    <div class="main-wrapper">
-        <div id="event-group">
-            placeholder for adding different sections of event js object
+    <div id="main-wrapper">
+        <div id="main-content">
+            <div id="content-top-bar">
+                <div id="content-sort">
+                    <h4>Sort By:</h4>
+                    <ul id="sort-input">
+                        <li><input type="radio" name="sort-task">Date</li>
+                        <li><input type="radio" name="sort-task">Priority</li>
+                        <li><input type="radio" name="sort-task">Duration</li>
+                    </ul>
+                </div>
+                <button id="add-task-btn">Add Task</button>
+            </div>
+
+            <div class="list-card-container top">
+                <span class="span name">Name</span>
+                <span class="span description">Description</span>
+                <span class="span due-date">Due Date</span>
+                <span class="span priority">Priority</span>
+                <span class="span difficulty">Difficulty</span>
+                <span class="span duration">Duration</span>
+                <span class="span button-finished">Task Finished</span>
+            </div>
+
+            <div id="list-content-event">
+                
+            </div>
         </div>
 
-        <div id="main-content">
-            <div class="content sort">
-                <h4>Sort By:</h4>
-                <ul id="sort-input">
-                    <li><input type="radio">Date</li>
-                    <li><input type="radio">Priority</li>
-                    <li><input type="radio">Duration</li>
-                </ul>
-            </div>
+        <div id="display-edit-wrapper">
+            <form action="#" id="edit-event">
 
-            <div class="content event">
-                placeholder for event card js object
-            </div>
+            </form>
         </div>
     </div>
-    
+
     <form action="#" id="add-event">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" required>
@@ -70,7 +85,10 @@
             <li><input type="radio" name="duration" value="short">Short</li>
         </ul>
 
-        <button id="submit-btn">Add Task</button>
+        <div class="button-container">
+            <button id="cancel-btn">Cancel</button>
+            <button id="submit-btn">Add Task</button>
+        </div>
     </form>
 
 </body>

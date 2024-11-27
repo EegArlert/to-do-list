@@ -1,4 +1,4 @@
-export function createDOMELement(tag, className, id) {
+export function createDOMElement(tag, className, id) {
     const domObject = document.createElement(tag);
 
     //check if classname and id will be added to the object
@@ -7,12 +7,26 @@ export function createDOMELement(tag, className, id) {
             domObject.id = id;
             return domObject
         } else {
-            domObject.classList.add(className);
+            const classNameArr = className.split(" ");
+            classNameArr.forEach(className => {
+                domObject.classList.add(className);
+            });
             return domObject
         }
-    
+
     } else {
-        domObject.classList.add(className);
+        const classNameArr = className.split(" ");
+        classNameArr.forEach(className => {
+            domObject.classList.add(className);
+        });
+
         domObject.id = id;
+
+        return domObject;
     }
+}
+
+export function selectDOMElement(elementName) {
+    const domObject = document.querySelector(elementName);
+    return domObject;
 }
