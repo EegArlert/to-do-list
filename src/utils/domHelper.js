@@ -30,3 +30,10 @@ export function selectDOMElement(elementName) {
     const domObject = document.querySelector(elementName);
     return domObject;
 }
+
+
+export function styleCard(element) {
+    
+        element.style.backgroundColor = '#ADD8E6'
+        
+}

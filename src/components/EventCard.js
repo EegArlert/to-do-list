@@ -1,73 +1,102 @@
 import { createDOMElement, selectDOMElement } from "../utils/domHelper";
-import { getEvent } from "../store/localStorage";
+import { getEvent, deleteEvent } from "../store/localStorage";
+import { eventKeyListener } from "../utils/EventLogic";
 
 /*
 
 */
-export const createEventCard = (key) => {
+export const renderEventCard = (key) => {
+
+    const focusEvent = getEvent(key);
 
     const eventCardContainer = createDOMElement('div', 'card-container', null);
-    
-    const parentContainer = selectDOMElement('.display-event');
+
+    const parentContainer = selectDOMElement('#display-edit-wrapper');
     parentContainer.appendChild(eventCardContainer);
 
-    const anEvent = getEvent(key);
-
     //creating label for each attribute
-    const eventCardNameLabel = createDOMElement('div', 'card-label name', null);
-    eventCardNameLabel.innerText = 'Name';
+    const eventCardNameLabel = createDOMElement('label', 'focus-label name', null);
+    eventCardNameLabel.innerText = `Name`;
+    eventCardNameLabel.htmlFor = "focus-input-name"
     eventCardContainer.appendChild(eventCardNameLabel);
 
-    const eventCardDescriptionLabel = createDOMElement('div', 'card-label description', null);
+    const eventCardDescriptionLabel = createDOMElement('label', 'focus-label description', null);
     eventCardDescriptionLabel.innerText = 'Description';
+    eventCardDescriptionLabel.htmlFor = "focus-input-description"
     eventCardContainer.appendChild(eventCardDescriptionLabel);
 
-    const eventCardDueDateLabel = createDOMElement('div', 'card-label due-date', null);
+    const eventCardDueDateLabel = createDOMElement('label', 'focus-label due-date', null);
     eventCardDueDateLabel.innerText = 'Due Date';
+    eventCardDueDateLabel.htmlFor = "focus-input-due-date"
     eventCardContainer.appendChild(eventCardDueDateLabel);
 
-    const eventCardPriorityLabel = createDOMElement('div', 'card-label priority', null);
+    const eventCardPriorityLabel = createDOMElement('label', 'focus-label priority', null);
     eventCardPriorityLabel.innerText = 'Priority';
+    eventCardPriorityLabel.htmlFor = "focus-input-priority"
     eventCardContainer.appendChild(eventCardPriorityLabel);
 
-    const eventCardDifficultyLabel = createDOMElement('div', 'card-label difficulty', null);
+    const eventCardDifficultyLabel = createDOMElement('label', 'focus-label difficulty', null);
     eventCardDifficultyLabel.innerText = 'Difficulty';
+    eventCardDifficultyLabel.htmlFor = "focus-input-difficulty"
     eventCardContainer.appendChild(eventCardDifficultyLabel);
 
-    const eventCardDurationLabel = createDOMElement('div', 'card-label duration', null);
+    const eventCardDurationLabel = createDOMElement('label', 'focus-label duration', null);
     eventCardDurationLabel.innerText = 'Duration';
+    eventCardDurationLabel.htmlFor = "focus-input-duration"
     eventCardContainer.appendChild(eventCardDurationLabel);
 
 
     //creating label for each attribute
-    const eventCardName = createDOMElement('div', 'card-input name', null);
-    eventCardName.innerText = anEvent.name;
+    const eventCardName = createDOMElement('input', 'focus-input', 'focus-input-name');
+    eventCardName.value = focusEvent.name;
     eventCardContainer.appendChild(eventCardName);
 
-    const eventCardDescription = createDOMElement('div', 'card-input description', null);
-    eventCardDescription.innerText = anEvent.description;
+    const eventCardDescription = createDOMElement('input', 'focus-input', 'focus-input-description');
+    eventCardDescription.value = focusEvent.description;
     eventCardContainer.appendChild(eventCardDescription);
 
-    const eventCardDueDate = createDOMElement('div', 'card-input due-date', null);
-    eventCardDueDate.innerText = anEvent.dueDate;
+    const eventCardDueDate = createDOMElement('input', 'focus-input', 'focus-input-due-date');
+    eventCardDueDate.value = focusEvent.dueDate;
     eventCardContainer.appendChild(eventCardDueDate);
 
-    const eventCardPriority = createDOMElement('div', 'card-input priority', null);
-    eventCardPriority.innerText = anEvent.priority;
+    const eventCardPriority = createDOMElement('input', 'focus-input', 'focus-input-priority');
+    eventCardPriority.value = focusEvent.priority;
     eventCardContainer.appendChild(eventCardPriority);
 
-    const eventCardDifficulty = createDOMElement('div', 'card-input difficulty', null);
-    eventCardDifficulty.innerText = anEvent.difficulty;
+    const eventCardDifficulty = createDOMElement('input', 'focus-input', 'focus-input-difficulty');
+    eventCardDifficulty.value = focusEvent.difficulty;
     eventCardContainer.appendChild(eventCardDifficulty);
 
-    const eventCardDuration = createDOMElement('div', 'card-input duration', null);
-    eventCardDuration.innerText = anEvent.duration;
+    const eventCardDuration = createDOMElement('input', 'focus-input', 'focus-input-duration');
+    eventCardDuration.value = focusEvent.duration;
     eventCardContainer.appendChild(eventCardDuration);
 
-    const cardFinishButton = createDOMElement('button', 'finish-btn', null);
-    cardFinishButton.innerText = "Task Finished";
-    eventCardContainer.appendChild(cardFinishButton);
 
+    const eventCardButtonContainer = createDOMElement('div', 'focus-button-container', null);
+
+    const cardEditButton = createDOMElement('button', 'card-btn edit', null);
+    cardEditButton.innerText = "Edit Task";
+    cardEditButton.addEventListener('click', () => {
+        const editEventCard = (key) => {
+
+        }
+    });
+    eventCardButtonContainer.appendChild(cardEditButton)
+
+  
+    const cardDeleteButton = createDOMElement('button', 'card-btn finish', null);
+    cardDeleteButton.innerText = "Task Finished";
+    cardDeleteButton.addEventListener('click', () => {
+        const deleteEventCard = (key) => {
+
+        }
+    });
+
+    eventCardButtonContainer.appendChild(cardDeleteButton);
+    
+    eventCardContainer.appendChild(eventCardButtonContainer);
 }
+
+
 
 

@@ -5,6 +5,10 @@ export function addEvent(name, description, dueDate, priority, difficulty, durat
     console.log('task has been added to the local storage')
 }
 
+export function editEvent(key, name, description, dueDate, priority, difficulty, duration) {
+    localStorage.setItem(key, Event(name, description, dueDate, priority, difficulty, duration));
+}
+
 export function deleteEvent(key) {
     localStorage.removeItem(key);
     console.log(`task with key number ${key} has been removed`)
@@ -29,4 +33,6 @@ export function getAllEvent(){
 
     return arr;
 }
+
+
 

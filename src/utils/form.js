@@ -1,4 +1,4 @@
-import { addEvent } from "../store/localStorage";
+import { addEvent, getEvent } from "../store/localStorage";
 import { selectDOMElement } from "./domHelper";
 
 
@@ -14,11 +14,12 @@ export function submitForm() {
 
     addEvent(name, description, dueDate, priority, difficulty, duration);
 
-    console.log(name);
-    console.log(dueDate);
-
     return {
         form, name, description, dueDate, priority, difficulty, duration
     }
+}
 
+export function editForm(key) {
+    const currentEvent = getEvent(key);
+    
 }

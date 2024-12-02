@@ -3,7 +3,7 @@ import { createDOMElement, selectDOMElement } from "../utils/domHelper";
 
 
 
-export const eventList = () => {
+export const renderAddedEvent = () => {
     
     const key = localStorage.length - 1;
     const event = getEvent(key);
@@ -44,7 +44,7 @@ export const eventList = () => {
 
 }
 
-export const allEventList = () => {
+export const renderAllEventList = () => {
 
     let key = 1;
 
@@ -83,7 +83,6 @@ export const allEventList = () => {
         listCardContainer.appendChild(statusCheckbox);
     
         parentContainer.appendChild(listCardContainer);
-
         
         key++;
     });
