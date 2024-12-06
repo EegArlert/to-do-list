@@ -1,6 +1,7 @@
 import { createDOMElement, selectDOMElement } from "../utils/domHelper";
-import { getEvent, deleteEvent } from "../store/localStorage";
-import { eventKeyListener } from "../utils/EventLogic";
+import { getEvent, deleteEvent, editEvent } from "../store/localStorage";
+import { eventKeyListener } from "../utils/appLogic";
+import { renderAllEventList, resetEventList } from "./EventList";
 
 /*
 
@@ -16,87 +17,97 @@ export const renderEventCard = (key) => {
 
     //creating label for each attribute
     const eventCardNameLabel = createDOMElement('label', 'focus-label name', null);
-    eventCardNameLabel.innerText = `Name`;
-    eventCardNameLabel.htmlFor = "focus-input-name"
-    eventCardContainer.appendChild(eventCardNameLabel);
+    setChildLabelProperty(eventCardNameLabel, eventCardContainer, 'Name', 'focus-input-name');
 
     const eventCardDescriptionLabel = createDOMElement('label', 'focus-label description', null);
-    eventCardDescriptionLabel.innerText = 'Description';
-    eventCardDescriptionLabel.htmlFor = "focus-input-description"
-    eventCardContainer.appendChild(eventCardDescriptionLabel);
+    setChildLabelProperty(eventCardDescriptionLabel, eventCardContainer, 'Description', 'focus-input-description');
 
     const eventCardDueDateLabel = createDOMElement('label', 'focus-label due-date', null);
-    eventCardDueDateLabel.innerText = 'Due Date';
-    eventCardDueDateLabel.htmlFor = "focus-input-due-date"
-    eventCardContainer.appendChild(eventCardDueDateLabel);
+    setChildLabelProperty(eventCardDueDateLabel, eventCardContainer, 'Due Date', 'focus-input-due-date');
 
     const eventCardPriorityLabel = createDOMElement('label', 'focus-label priority', null);
-    eventCardPriorityLabel.innerText = 'Priority';
-    eventCardPriorityLabel.htmlFor = "focus-input-priority"
-    eventCardContainer.appendChild(eventCardPriorityLabel);
+    setChildLabelProperty(eventCardPriorityLabel, eventCardContainer, 'Priority', 'focus-input-priority');
 
     const eventCardDifficultyLabel = createDOMElement('label', 'focus-label difficulty', null);
-    eventCardDifficultyLabel.innerText = 'Difficulty';
-    eventCardDifficultyLabel.htmlFor = "focus-input-difficulty"
-    eventCardContainer.appendChild(eventCardDifficultyLabel);
+    setChildLabelProperty(eventCardDifficultyLabel, eventCardContainer, 'Difficulty', 'focus-input-difficulty')
 
     const eventCardDurationLabel = createDOMElement('label', 'focus-label duration', null);
-    eventCardDurationLabel.innerText = 'Duration';
-    eventCardDurationLabel.htmlFor = "focus-input-duration"
-    eventCardContainer.appendChild(eventCardDurationLabel);
+    setChildLabelProperty(eventCardDurationLabel, eventCardContainer, 'Duration', 'focus-input-duration');
 
 
     //creating label for each attribute
     const eventCardName = createDOMElement('input', 'focus-input', 'focus-input-name');
-    eventCardName.value = focusEvent.name;
-    eventCardContainer.appendChild(eventCardName);
+    setChildInputProperty(eventCardName, eventCardContainer, focusEvent.name);
 
     const eventCardDescription = createDOMElement('input', 'focus-input', 'focus-input-description');
-    eventCardDescription.value = focusEvent.description;
-    eventCardContainer.appendChild(eventCardDescription);
+    setChildInputProperty(eventCardDescription, eventCardContainer, focusEvent.description);
 
     const eventCardDueDate = createDOMElement('input', 'focus-input', 'focus-input-due-date');
-    eventCardDueDate.value = focusEvent.dueDate;
-    eventCardContainer.appendChild(eventCardDueDate);
+    setChildInputProperty(eventCardDueDate, eventCardContainer, focusEvent.dueDate);
 
     const eventCardPriority = createDOMElement('input', 'focus-input', 'focus-input-priority');
-    eventCardPriority.value = focusEvent.priority;
-    eventCardContainer.appendChild(eventCardPriority);
+    setChildInputProperty(eventCardPriority, eventCardContainer, focusEvent.priority);
 
     const eventCardDifficulty = createDOMElement('input', 'focus-input', 'focus-input-difficulty');
-    eventCardDifficulty.value = focusEvent.difficulty;
-    eventCardContainer.appendChild(eventCardDifficulty);
+    setChildInputProperty(eventCardDifficulty, eventCardContainer, focusEvent.difficulty);
 
     const eventCardDuration = createDOMElement('input', 'focus-input', 'focus-input-duration');
-    eventCardDuration.value = focusEvent.duration;
-    eventCardContainer.appendChild(eventCardDuration);
+    setChildInputProperty(eventCardDuration, eventCardContainer, focusEvent.duration);
 
 
     const eventCardButtonContainer = createDOMElement('div', 'focus-button-container', null);
 
-    const cardEditButton = createDOMElement('button', 'card-btn edit', null);
-    cardEditButton.innerText = "Edit Task";
-    cardEditButton.addEventListener('click', () => {
-        const editEventCard = (key) => {
+    const cardSubmitButton = createDOMElement('button', 'card-submit-btn', null);
+    eventCardButtonContainer.appendChild(cardSubmitButton);
+    cardSubmitButton.innerText = "Submit";
 
-        }
+    const cardCancelButton = createDOMElement('button', 'card-cancel-btn', null);
+    eventCardButtonContainer.appendChild(cardCancelButton);
+    cardCancelButton.innerText = "Cancel"
+
+    cardSubmitButton.addEventListener('click', () => {
+        editEvent(
+            key,
+            eventCardName.value,
+            eventCardDescription.value,
+            eventCardDueDate.value,
+            eventCardPriority.value,
+            eventCardDifficulty.value,
+            eventCardDuration.value
+        );
+
+        eventCardContainer.innerHTML = '';
+        eventCardContainer.style.display = 'none';
+        resetEventList();
+        renderAllEventList();
     });
-    eventCardButtonContainer.appendChild(cardEditButton)
 
-  
-    const cardDeleteButton = createDOMElement('button', 'card-btn finish', null);
-    cardDeleteButton.innerText = "Task Finished";
-    cardDeleteButton.addEventListener('click', () => {
-        const deleteEventCard = (key) => {
+    /*
+        The problem on this module,
+        This module still perform like the old module. 
+        We need to change the edit button to submit edit and 
+        change the finished task button to cancel edit.
+    */
 
-        }
+    cardCancelButton.addEventListener('click', () => {
+        eventCardContainer.innerHTML = '';
+        eventCardContainer.style.display = 'none';
     });
 
-    eventCardButtonContainer.appendChild(cardDeleteButton);
-    
     eventCardContainer.appendChild(eventCardButtonContainer);
 }
 
 
+function setChildInputProperty(element, parentElement, objAttribute) {
+    element.value = objAttribute;
+    element.readOnly = false;
+    // element.disabled = true;
+    parentElement.appendChild(element)
+}
 
 
+function setChildLabelProperty(element, parentElement, innerText, htmlFor) {
+    element.innerText = innerText;
+    element.htmlFor = htmlFor;
+    parentElement.appendChild(element);
+}

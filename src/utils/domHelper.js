@@ -33,7 +33,21 @@ export function selectDOMElement(elementName) {
 
 
 export function styleCard(element) {
-    
-        element.style.backgroundColor = '#ADD8E6'
-        
+
+    element.style.backgroundColor = '#ADD8E6'
+
+}
+export function toggle(containerArr, className) {
+    // Check if containerArr is an array or NodeList
+    if (containerArr instanceof NodeList || Array.isArray(containerArr)) {
+        // Loop through the elements
+        containerArr.forEach(element => {
+            element.classList.toggle(className);
+        });
+    } else if (containerArr instanceof HTMLElement) {
+        // Single HTMLElement
+        containerArr.classList.toggle(className);
+    } else {
+        console.error("Invalid input passed to toggle: ", containerArr);
+    }
 }

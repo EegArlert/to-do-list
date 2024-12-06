@@ -24,13 +24,17 @@ export function getEvent(key) {
     // return localStorage.getItem(key);
 }
 
-export function getAllEvent(){
+export function getAllEventKey() {
     const arr = [];
-    
-    for(let i = 1; i < localStorage.length; i++){
-       arr.push(getEvent(i));
-    }
 
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) === 'debug') {
+            continue;
+        }
+        let key = localStorage.key(i);
+        arr.push(key)
+
+    }
     return arr;
 }
 

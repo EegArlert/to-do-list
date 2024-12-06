@@ -1,33 +1,39 @@
-import { submitForm } from './utils/form';
-import { getAllEvent } from './store/localStorage';
-import { eventKeyListener } from './utils/EventLogic';
-import { renderEventCard } from './components/EventCard';
-import { renderAddedEvent, renderAllEventList } from './components/EventList';
+import { activeContainerChecker, addTask, submitButton, cancelButton, deleteButton, editButton } from './utils/appLogic';
+import { renderAllEventList } from './components/EventList';
+import { getAllEventKey, addEvent } from './store/localStorage';
 import './styles/template.css'
+
+// APP LOGIC
+
 
 
 renderAllEventList();
 
-const formSubmitButton = document.querySelector('#submit-btn');
-const arr = document.querySelectorAll('.list-card-container');
-let keyClicked = eventKeyListener(arr, returnKey);
-
-
-formSubmitButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    submitForm();
-    renderAddedEvent();
-    // const updateArr = getAllEvent();
-    // eventKeyListener(updateArr, consoleKey);
+document.addEventListener('DOMContentLoaded', () => {
+    // renderAllEventList();
+    addTask();
+    editButton();
+    submitButton();
+    cancelButton();
+    deleteButton();
 })
 
 
 
-function returnKey(key) {
-    const parentContainer = document.querySelector("#display-edit-wrapper");
-    parentContainer.innerHTML = "";
-    let clickedKey = key;
-    console.log(clickedKey)
-    renderEventCard(clickedKey);
-    return clickedKey;
-}
+// renderAllEventList();
+
+// // const formSubmitButton = document.querySelector('#submit-btn');
+// // const arr = document.querySelectorAll('.list-card-container');
+
+
+
+// // formSubmitButton.addEventListener('click', (e) => {
+// //     e.preventDefault();
+// //     submitForm();
+// //     renderEvent();
+    
+// //     // const updateArr = getAllEvent();
+// //     // eventKeyListener(updateArr, consoleKey);
+// // })
+
+// submittedForm(renderEvent);

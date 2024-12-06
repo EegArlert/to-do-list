@@ -1,6 +1,6 @@
 // Event Class
 
-export function Event(name, description, dueDate, priority, difficulty, duration, key) {
+export function Event(name, description, dueDate, priority, difficulty, duration) {
 
     const eventObject = {
         name: name,
@@ -8,7 +8,8 @@ export function Event(name, description, dueDate, priority, difficulty, duration
         dueDate: dueDate,
         priority: priority,
         difficulty: difficulty,
-        duration: duration ,
+        duration: duration,
+        finished: false,
     };
 
     return JSON.stringify(eventObject);

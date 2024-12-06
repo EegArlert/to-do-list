@@ -1,10 +1,11 @@
+
 import { addEvent, getEvent } from "../store/localStorage";
 import { selectDOMElement } from "./domHelper";
 
 
-export function submitForm() {
+function processForm() {
     console.log("submitForm function invoked");
-    const form = selectDOMElement('form');
+    let key = localStorage.length
     const name = selectDOMElement('#name').value;
     const description = selectDOMElement('#description').value;
     const dueDate = selectDOMElement('#date').value;
@@ -14,12 +15,11 @@ export function submitForm() {
 
     addEvent(name, description, dueDate, priority, difficulty, duration);
 
-    return {
-        form, name, description, dueDate, priority, difficulty, duration
-    }
-}
+    return key
+};
 
-export function editForm(key) {
-    const currentEvent = getEvent(key);
-    
+export function submitForm(callback) {
+        const key = processForm();
+        console.log(key)
+        callback(key);
 }
