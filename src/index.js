@@ -1,22 +1,35 @@
-import { activeContainerChecker, addTask, submitButton, cancelButton, deleteButton, editButton } from './utils/appLogic';
+import { 
+    activeContainerChecker, 
+    sortByDueDateFilter, 
+    addTask, 
+    submitButton, 
+    cancelButton, 
+    deleteButton, 
+    editButton, 
+    checkBoxClicked, 
+    sortByPriorityFilter, 
+    sortByDurationFilter
+} from './utils/appLogic';
 import { renderAllEventList } from './components/EventList';
-import { getAllEventKey, addEvent } from './store/localStorage';
 import './styles/template.css'
+
 
 // APP LOGIC
 
-
-
-renderAllEventList();
-
 document.addEventListener('DOMContentLoaded', () => {
-    // renderAllEventList();
+    renderAllEventList();
+    checkBoxClicked();
     addTask();
     editButton();
     submitButton();
     cancelButton();
     deleteButton();
+    sortByDueDateFilter();
+    sortByPriorityFilter();
+    sortByDurationFilter();
 })
+
+
 
 
 

@@ -67,7 +67,7 @@ export const renderEventCard = (key) => {
 
     cardSubmitButton.addEventListener('click', () => {
         editEvent(
-            key,
+            focusEvent.taskId,
             eventCardName.value,
             eventCardDescription.value,
             eventCardDueDate.value,

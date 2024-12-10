@@ -1,14 +1,16 @@
 import { selectDOMElement, toggle } from "./domHelper";
 import { submitForm } from "./form";
-import { renderEvent,resetEventList, renderAllEventList } from "../components/EventList";
-import { deleteEvent, getAllEventKey } from "../store/localStorage";
+import { renderEvent, resetEventList, renderAllEventList } from "../components/EventList";
+import { deleteEvent, getAllEvent } from "../store/localStorage";
 import { renderEventCard } from "../components/EventCard";
+import { sortByDueDate, sortByDuration, sortByPriority } from "./sort";
 
 
 const activeContainer = document.querySelectorAll('.blur');
 
 export function eventKeyListener(element, callback) {
     // This returns the key of the container event being clicked
+    console.log(element);
     const key = element.id.split("-")[1];
     callback(key);
 };
@@ -25,8 +27,7 @@ export function addTask() {
 // Submit button on form, submit form and go back to main screen
 export function submitButton() {
     const submitButton = selectDOMElement('#submit-btn');
-    submitButton.addEventListener('click', (e) => {
-        e.preventDefault();
+    submitButton.addEventListener('click', () => {
         submitForm(renderEvent);
         toggle(activeContainer, 'active');
         renderAllEventList();
@@ -34,7 +35,6 @@ export function submitButton() {
 }
 
 // Cancel button on form, close form
-
 export function cancelButton() {
     const cancelButton = selectDOMElement('#cancel-btn');
     cancelButton.addEventListener('click', () => {
@@ -43,22 +43,16 @@ export function cancelButton() {
 }
 
 
-
-
-// export function selectEventListener() {
-//     console.log('select event listener function run')
-//     const containerArr = document.querySelectorAll('.list-card-container');
-//     let selectedEventKeys = [];
-//     containerArr.forEach(container => {
-//         container.addEventListener('click', () => {
-//             toggle(container, 'active')
-//             selectedEventKeys = activeContainerChecker(containerArr);
-//             console.log(`selected event listener function: ${selectedEventKeys}`)
-//         });
-//     });
-    
-//     return selectedEventKeys
-// };
+//This function add the eventListener for content list when click,
+//and return the key if there is any that active
+export function selectEventListener() {
+    const containerArr = document.querySelectorAll('.list-card-container');
+    containerArr.forEach(container => {
+        container.addEventListener('click', () => {
+            toggle(container, 'active');
+        })
+    })
+};
 
 // Check which container has active class and return the key of it.
 
@@ -67,41 +61,43 @@ export function cancelButton() {
     THIS NEEDS TO RUN ON APPLOGIC.JS NOT ON INDEX.
 */
 
-export function activeContainerChecker() {
+
+function activeContainerChecker() {
     console.log('active container checker function called');
     let activeKey = [];
     const containerArr = document.querySelectorAll('.list-card-container');
+    console.log(containerArr)
     containerArr.forEach(container => {
+        container
         if (container.classList.contains('active')) {
-                eventKeyListener(container, (key) => {
-                    activeKey.push(key);
-                    console.log(activeKey);
-                })
-            }
-        
-        if (activeKey.length > 0) {
-            return activeKey
-
-        } else {
-            return 'The are no active key';
-        }
-    })
+            eventKeyListener(container, (key) => {
+                console.log("inserting key");
+                activeKey.push(key);
+            })
+        };
+    });
+    if (activeKey.length <= 0) {
+        console.log('there are no active key');
+        return []
+    }
+    return activeKey;
 }
 
 
 export function editButton() {
     const editTaskButton = selectDOMElement('#edit-btn');
     editTaskButton.addEventListener('click', () => {
+        const activeKey = activeContainerChecker();
         console.log('edit button clicked')
-        console.log(selectedEventKeys)
-        if (selectedEventKeys.length <= 0) {
+        console.log(activeKey)
+        if (activeKey.length <= 0) {
             alert('Please choose a task to edit');
             return
-        } else if (selectedEventKeys.length > 1){
+        } else if (activeKey.length > 1) {
             alert('Please choose only one task to edit');
             return
         }
-        renderEventCard(selectedEventKeys);
+        renderEventCard(activeContainerChecker());
     });
 }
 
@@ -112,23 +108,84 @@ export function deleteButton() {
     const deleteTaskButton = selectDOMElement('#delete-btn');
 
     deleteTaskButton.addEventListener('click', () => {
-        
-        if(selectedEventKeys.length < 1){
+        console.log(activeContainerChecker());
+        if (activeContainerChecker().length < 1) {
             return
         }
 
-        selectedEventKeys.forEach(key => {
+        activeContainerChecker().forEach(key => {
             deleteEvent(key);
         })
-
-        resetEventList();
         renderAllEventList();
     })
 }
 
 export function checkBoxClicked() {
 
+    const containerArr = document.querySelectorAll(".list-card-container");
+
+    const finishedContentParentContainer = selectDOMElement('#finished-task-content-grid');
+    const contentParentContainer = selectDOMElement('#list-content-event');
+
+    containerArr.forEach(container => {
+        let checkbox = selectDOMElement(`#${container.id} .event-checkbox`);
+        console.log(checkbox)
+        if (checkbox.checked && contentParentContainer.contains(container)) {
+            finishedContentParentContainer.appendChild(container);
+        } else if (!checkbox.checked && finishedContentParentContainer.contains(container)) {
+            contentParentContainer.appendChild(container);
+        }
+    })
+
 }
 
 
 
+export function sortByDueDateFilter() {
+    
+    const filterDueDateButton = selectDOMElement('#sort-date');
+    const arr = sortByDueDate();
+    
+    filterDueDateButton.addEventListener('click', () => {
+        resetEventList();
+        
+        arr.forEach(key => {
+            renderEvent(key); 
+        })
+        
+        checkBoxClicked();
+        selectEventListener();
+    })
+}
+
+export function sortByPriorityFilter() {
+    const filterPriorityButton = selectDOMElement('#sort-priority');
+    const arr = sortByPriority();
+
+    filterPriorityButton.addEventListener('click', () => {
+        resetEventList();
+        
+        arr.forEach(key => {
+            renderEvent(key);
+        })
+
+        checkBoxClicked();
+        selectEventListener();
+    })
+}
+
+export function sortByDurationFilter() {
+    const filterDurationButton = selectDOMElement('#sort-duration');
+    const arr = sortByDuration();
+
+    filterDurationButton.addEventListener('click', () => {
+        resetEventList();
+        
+        arr.forEach(key => {
+            renderEvent(key);
+        })
+
+        checkBoxClicked();
+        selectEventListener();
+    })
+}

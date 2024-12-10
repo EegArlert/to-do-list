@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="blur">
         <h1>Task Management</h1>
     </header>
 
@@ -21,12 +21,31 @@
         <div id="main-content" class="">
             <div id="content-top-bar">
                 <div id="content-sort">
-                    <h4>Sort By:</h4>
-                    <ul id="sort-input">
-                        <li><input type="radio" name="sort-task">Date</li>
-                        <li><input type="radio" name="sort-task">Priority</li>
-                        <li><input type="radio" name="sort-task">Duration</li>
-                    </ul>
+                    <h4>Sort By :</h4>
+                    
+                    <label class="rad-label">
+                        <input type="radio" class="rad-input" id="sort-date" name="sort-task">
+                        <div class="rad-design"></div>
+                        <div class="rad-text">Due Date</div>
+                    </label>
+
+                    <label class="rad-label">
+                        <input type="radio" class="rad-input" id="sort-priority" name="sort-task">
+                        <div class="rad-design"></div>
+                        <div class="rad-text">Priority</div>
+                    </label>
+
+                    <label class="rad-label">
+                        <input type="radio" class="rad-input" id="sort-duration" name="sort-task">
+                        <div class="rad-design"></div>
+                        <div class="rad-text">Duration</div>
+                    </label>
+                   
+                    <!-- <ul id="sort-input">
+                        <li><input type="radio" id="sort-date" name="sort-task">Date</li>
+                        <li><input type="radio" id="sort-priority" name="sort-task">Priority</li>
+                        <li><input type="radio" id="sort-duration" name="sort-task">Duration</li>
+                    </ul> -->
                 </div>
                 <div id="top-button-container">
                     <button id="add-btn">Add Task</button>
@@ -53,8 +72,17 @@
         <div id="display-edit-wrapper" class=""></div>
     </div>
 
-    <div id="finished-task-wrapper">
+    <div id="finished-task-wrapper" class="blur ">
         <h2>Finished Task</h2>
+        <div class="grid-label">
+            <span class="span name">Name</span>
+            <span class="span description">Description</span>
+            <span class="span due-date">Due Date</span>
+            <span class="span priority">Priority</span>
+            <span class="span difficulty">Difficulty</span>
+            <span class="span duration">Duration</span>
+            <span class="span button-finished">Task Finished</span>
+        </div>
         <div id="finished-task-content-grid">
 
         </div>

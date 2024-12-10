@@ -2,7 +2,10 @@ export function createDOMElement(tag, className, id) {
     const domObject = document.createElement(tag);
 
     //check if classname and id will be added to the object
-    if (className === null || id === null) {
+    if (className === null && id === null){
+        return domObject;
+    }
+    else if (className === null || id === null) {
         if (className === null) {
             domObject.id = id;
             return domObject
@@ -13,17 +16,17 @@ export function createDOMElement(tag, className, id) {
             });
             return domObject
         }
-
-    } else {
-        const classNameArr = className.split(" ");
-        classNameArr.forEach(className => {
-            domObject.classList.add(className);
-        });
-
-        domObject.id = id;
-
-        return domObject;
     }
+    else {
+    const classNameArr = className.split(" ");
+    classNameArr.forEach(className => {
+        domObject.classList.add(className);
+    });
+
+    domObject.id = id;
+
+    return domObject;
+}
 }
 
 export function selectDOMElement(elementName) {

@@ -10,7 +10,6 @@ module.exports = {
             title: 'production',
             template: './src/template.html',
         }),
-        
     ],
     output: {
         filename: '[name].bundle.js',
