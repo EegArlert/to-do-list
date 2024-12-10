@@ -1,9 +1,8 @@
-import { 
-    activeContainerChecker, 
+import {  
     sortByDueDateFilter, 
     addTask, 
-    submitButton, 
-    cancelButton, 
+    cardSubmitButton,
+    cardCancelButton, 
     deleteButton, 
     editButton, 
     checkBoxClicked, 
@@ -21,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     checkBoxClicked();
     addTask();
     editButton();
-    submitButton();
-    cancelButton();
     deleteButton();
     sortByDueDateFilter();
     sortByPriorityFilter();

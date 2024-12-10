@@ -25,21 +25,16 @@ export function addTask() {
 
 
 // Submit button on form, submit form and go back to main screen
-export function submitButton() {
-    const submitButton = selectDOMElement('#submit-btn');
-    submitButton.addEventListener('click', () => {
-        submitForm(renderEvent);
-        toggle(activeContainer, 'active');
-        renderAllEventList();
-    })
+export function cardSubmitLogic(parentContainer) {
+    parentContainer.innerHTML = '';
+    renderAllEventList();
+    toggle(parentContainer, 'active');
 }
 
 // Cancel button on form, close form
-export function cancelButton() {
-    const cancelButton = selectDOMElement('#cancel-btn');
-    cancelButton.addEventListener('click', () => {
-        toggle(activeContainer, 'active');
-    });
+export function cardCancelLogic(parentContainer) {
+    parentContainer.innerHTML = '';
+    toggle(parentContainer, 'active');
 }
 
 
@@ -98,6 +93,9 @@ export function editButton() {
             return
         }
         renderEventCard(activeContainerChecker());
+
+        const editContainer = selectDOMElement('#display-edit-wrapper');
+        toggle(editContainer, 'active')
     });
 }
 
@@ -142,17 +140,17 @@ export function checkBoxClicked() {
 
 
 export function sortByDueDateFilter() {
-    
+
     const filterDueDateButton = selectDOMElement('#sort-date');
     const arr = sortByDueDate();
-    
+
     filterDueDateButton.addEventListener('click', () => {
         resetEventList();
-        
+
         arr.forEach(key => {
-            renderEvent(key); 
+            renderEvent(key);
         })
-        
+
         checkBoxClicked();
         selectEventListener();
     })
@@ -164,7 +162,7 @@ export function sortByPriorityFilter() {
 
     filterPriorityButton.addEventListener('click', () => {
         resetEventList();
-        
+
         arr.forEach(key => {
             renderEvent(key);
         })
@@ -180,7 +178,7 @@ export function sortByDurationFilter() {
 
     filterDurationButton.addEventListener('click', () => {
         resetEventList();
-        
+
         arr.forEach(key => {
             renderEvent(key);
         })

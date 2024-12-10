@@ -23,9 +23,7 @@ export const renderEvent = (key) => {
 
     const eventDueDate = createDOMElement('span', 'event-input due-date', null);
     const dueDateArr = event.dueDate.split('-')
-    const formatDate = intlFormat(new Date(dueDateArr[0], dueDateArr[1] - 1, dueDateArr[2]), {
-        locale: 'en-US',
-      })
+    const formatDate = new Intl.DateTimeFormat('en-US').format(new Date(dueDateArr[0], dueDateArr[1]-1, dueDateArr[2]));
     eventDueDate.innerText = formatDate;
     listCardContainer.appendChild(eventDueDate);
 
@@ -88,10 +86,7 @@ export const renderEvent = (key) => {
 }
 
 export const renderAllEventList = () => {
-
-    console.log("try to render");
     resetEventList();
-    console.log(getAllEventKey())
     getAllEventKey().forEach(key => {
         renderEvent(key);
     });

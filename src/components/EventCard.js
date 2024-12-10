@@ -1,7 +1,8 @@
-import { createDOMElement, selectDOMElement } from "../utils/domHelper";
+import { createDOMElement, selectDOMElement, toggle } from "../utils/domHelper";
 import { getEvent, deleteEvent, editEvent } from "../store/localStorage";
-import { eventKeyListener } from "../utils/appLogic";
+import { eventKeyListener, cardCancelLogic, cardSubmitLogic } from "../utils/appLogic";
 import { renderAllEventList, resetEventList } from "./EventList";
+
 
 /*
 
@@ -65,6 +66,7 @@ export const renderEventCard = (key) => {
     eventCardButtonContainer.appendChild(cardCancelButton);
     cardCancelButton.innerText = "Cancel"
 
+    
     cardSubmitButton.addEventListener('click', () => {
         editEvent(
             focusEvent.taskId,
@@ -76,32 +78,21 @@ export const renderEventCard = (key) => {
             eventCardDuration.value
         );
 
-        eventCardContainer.innerHTML = '';
-        eventCardContainer.style.display = 'none';
-        resetEventList();
-        renderAllEventList();
+       cardSubmitLogic(parentContainer)
     });
-
-    /*
-        The problem on this module,
-        This module still perform like the old module. 
-        We need to change the edit button to submit edit and 
-        change the finished task button to cancel edit.
-    */
 
     cardCancelButton.addEventListener('click', () => {
-        eventCardContainer.innerHTML = '';
-        eventCardContainer.style.display = 'none';
-    });
+        cardCancelLogic(parentContainer);
+    })
 
     eventCardContainer.appendChild(eventCardButtonContainer);
+    
 }
 
 
 function setChildInputProperty(element, parentElement, objAttribute) {
     element.value = objAttribute;
     element.readOnly = false;
-    // element.disabled = true;
     parentElement.appendChild(element)
 }
 
