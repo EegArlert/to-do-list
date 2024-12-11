@@ -1,14 +1,16 @@
-import {  
+import { 
+    activeContainerChecker, 
     sortByDueDateFilter, 
     addTask, 
-    cardSubmitButton,
-    cardCancelButton, 
+    formSubmitButton, 
+    formCancelButton, 
     deleteButton, 
     editButton, 
     checkBoxClicked, 
-    sortByPriorityFilter, 
+    sortByPriorityFilter,
     sortByDurationFilter
-} from './utils/appLogic';
+ } 
+    from './utils/appLogic';
 import { renderAllEventList } from './components/EventList';
 import './styles/template.css'
 
@@ -20,12 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     checkBoxClicked();
     addTask();
     editButton();
+    formCancelButton();
+    formSubmitButton();
     deleteButton();
     sortByDueDateFilter();
     sortByPriorityFilter();
     sortByDurationFilter();
 })
-
 
 
 

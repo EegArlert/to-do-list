@@ -1,6 +1,6 @@
 import { createDOMElement, selectDOMElement, toggle } from "../utils/domHelper";
 import { getEvent, deleteEvent, editEvent } from "../store/localStorage";
-import { eventKeyListener, cardCancelLogic, cardSubmitLogic } from "../utils/appLogic";
+import { eventKeyListener } from "../utils/appLogic";
 import { renderAllEventList, resetEventList } from "./EventList";
 
 
@@ -66,7 +66,6 @@ export const renderEventCard = (key) => {
     eventCardButtonContainer.appendChild(cardCancelButton);
     cardCancelButton.innerText = "Cancel"
 
-    
     cardSubmitButton.addEventListener('click', () => {
         editEvent(
             focusEvent.taskId,
@@ -78,21 +77,27 @@ export const renderEventCard = (key) => {
             eventCardDuration.value
         );
 
-       cardSubmitLogic(parentContainer)
+        eventCardContainer.innerHTML = '';
+        eventCardContainer.style.display = 'none';
+        resetEventList();
+        renderAllEventList();
+        toggle(parentContainer, 'active');
     });
 
     cardCancelButton.addEventListener('click', () => {
-        cardCancelLogic(parentContainer);
-    })
+        eventCardContainer.innerHTML = '';
+        eventCardContainer.style.display = 'none';
+        toggle(parentContainer, 'active');
+    });
 
     eventCardContainer.appendChild(eventCardButtonContainer);
-    
 }
 
 
 function setChildInputProperty(element, parentElement, objAttribute) {
     element.value = objAttribute;
     element.readOnly = false;
+    // element.disabled = true;
     parentElement.appendChild(element)
 }
 

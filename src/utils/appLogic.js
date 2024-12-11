@@ -8,8 +8,8 @@ import { sortByDueDate, sortByDuration, sortByPriority } from "./sort";
 
 const activeContainer = document.querySelectorAll('.blur');
 
+// This returns the key of the container event being clicked
 export function eventKeyListener(element, callback) {
-    // This returns the key of the container event being clicked
     console.log(element);
     const key = element.id.split("-")[1];
     callback(key);
@@ -23,21 +23,6 @@ export function addTask() {
     })
 }
 
-
-// Submit button on form, submit form and go back to main screen
-export function cardSubmitLogic(parentContainer) {
-    parentContainer.innerHTML = '';
-    renderAllEventList();
-    toggle(parentContainer, 'active');
-}
-
-// Cancel button on form, close form
-export function cardCancelLogic(parentContainer) {
-    parentContainer.innerHTML = '';
-    toggle(parentContainer, 'active');
-}
-
-
 //This function add the eventListener for content list when click,
 //and return the key if there is any that active
 export function selectEventListener() {
@@ -50,13 +35,6 @@ export function selectEventListener() {
 };
 
 // Check which container has active class and return the key of it.
-
-
-/* TODO, NEED TO REDO THE FUNCTION CALL FOR CONTAINER CHECKER.
-    THIS NEEDS TO RUN ON APPLOGIC.JS NOT ON INDEX.
-*/
-
-
 function activeContainerChecker() {
     console.log('active container checker function called');
     let activeKey = [];
@@ -78,7 +56,25 @@ function activeContainerChecker() {
     return activeKey;
 }
 
+// Submit button on form, submit form and go back to main screen
+export function formSubmitButton() {
+    const submitButton = selectDOMElement('#submit-btn');
+    submitButton.addEventListener('click', () => {
+        submitForm(renderEvent);
+        renderAllEventList();
+        toggle(activeContainer, 'active');
+    })
+}
 
+// Cancel button on form page
+export function formCancelButton() {
+    const cancelButton = selectDOMElement('#cancel-btn');
+    cancelButton.addEventListener('click', () => {
+        toggle(activeContainer, 'active');
+    });
+}
+
+// Edit button on main page
 export function editButton() {
     const editTaskButton = selectDOMElement('#edit-btn');
     editTaskButton.addEventListener('click', () => {
@@ -93,14 +89,14 @@ export function editButton() {
             return
         }
         renderEventCard(activeContainerChecker());
-
+        
         const editContainer = selectDOMElement('#display-edit-wrapper');
         toggle(editContainer, 'active')
     });
 }
 
 
-//Delete Task Button that delete an event user focus on
+//Delete Task Button on main page that delete an event user focus on
 
 export function deleteButton() {
     const deleteTaskButton = selectDOMElement('#delete-btn');
@@ -127,7 +123,6 @@ export function checkBoxClicked() {
 
     containerArr.forEach(container => {
         let checkbox = selectDOMElement(`#${container.id} .event-checkbox`);
-        console.log(checkbox)
         if (checkbox.checked && contentParentContainer.contains(container)) {
             finishedContentParentContainer.appendChild(container);
         } else if (!checkbox.checked && finishedContentParentContainer.contains(container)) {
@@ -140,17 +135,17 @@ export function checkBoxClicked() {
 
 
 export function sortByDueDateFilter() {
-
+    
     const filterDueDateButton = selectDOMElement('#sort-date');
     const arr = sortByDueDate();
-
+    
     filterDueDateButton.addEventListener('click', () => {
         resetEventList();
-
+        
         arr.forEach(key => {
-            renderEvent(key);
+            renderEvent(key); 
         })
-
+        
         checkBoxClicked();
         selectEventListener();
     })
@@ -162,7 +157,7 @@ export function sortByPriorityFilter() {
 
     filterPriorityButton.addEventListener('click', () => {
         resetEventList();
-
+        
         arr.forEach(key => {
             renderEvent(key);
         })
@@ -176,9 +171,10 @@ export function sortByDurationFilter() {
     const filterDurationButton = selectDOMElement('#sort-duration');
     const arr = sortByDuration();
 
+    console.log('sortbyduration filter invoked')
     filterDurationButton.addEventListener('click', () => {
         resetEventList();
-
+        
         arr.forEach(key => {
             renderEvent(key);
         })

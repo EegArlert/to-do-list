@@ -34,5 +34,6 @@ function processForm() {
 
 export function submitForm(callback) {
         const key = processForm();
+        console.log(key)
         callback(key);
 }
